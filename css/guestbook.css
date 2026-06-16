@@ -38,9 +38,16 @@ html {
     height: 100%;
 }
 
+/* 페이지 전체를 뷰포트 높이에 고정 (문서 스크롤 없음, .gb-chat만 내부 스크롤)
+   → body 높이가 항상 뷰포트와 같아서 background-size: cover 비율이 흔들리지 않음 */
 body {
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+
     background-image:
-        url("../img/Guest Book Logo.png"),
         url("../img/G_Deco.png"),
         url("../img/Deco Banner.png"),
         url("../img/Background.png");
@@ -48,11 +55,9 @@ body {
     background-size:
         cover,
         cover,
-        cover,
         cover;
 
     background-position:
-        center 10%,
         center 10%,
         center 10%,
         center;
@@ -60,19 +65,34 @@ body {
     background-repeat:
         no-repeat,
         no-repeat,
-        no-repeat,
         no-repeat;
 }
 
 /* 헤더 */
 .site-header {
-    width: 300px;
+    width: 100%;
+    max-width: 320px;
     margin: 0 auto;
+    padding: 0 16px;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 14px;
-    margin-top: 140px;
+}
+
+.site-logo {
+    width: min(520px, 88vw);
+    margin: 0 auto 18px;
+    margin-top: clamp(70px, 12vh, 160px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.site-logo img {
+    display: block;
+    width: 100%;
+    height: auto;
 }
 
 #marquee-board {
@@ -108,8 +128,13 @@ nav {
 /* 메인 */
 .main-wrap {
     max-width: min(100%, 1200px);
+    width: 100%;
     margin: 20px auto;
     padding: 0 16px;
+    flex: 1 1 auto;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
 }
 
 .gb-input-area {
@@ -142,7 +167,7 @@ nav {
     padding: 8px 0;
     border-bottom: 1px solid rgba(255,255,255,0.25);
     margin-bottom: 8px;
-    font-size: 13px; /* 나중에 반응형 고려해서 고치기 */
+    font-size: 13px;
 }
 
 .gb-input--message {
@@ -183,10 +208,11 @@ nav {
 
 /* 방명록 채팅 영역 */
 .gb-chat {
+    width: 100%;
     max-width: 720px;
     margin: 32px auto 0;
-    height: calc(100vh - 420px);
-    min-height: 200px;
+    flex: 1 1 auto;
+    min-height: 120px;
     overflow-y: auto;
     overflow-x: hidden;
     padding: 8px;
@@ -271,7 +297,7 @@ nav {
 
 /* 말풍선 */
 .msg-bubble {
-    max-width: 72%;
+    max-width: 82%;
     padding: 10px 14px;
     font-size: 14px;
     line-height: 1.6;
@@ -529,4 +555,121 @@ nav {
 .toast.show {
     opacity: 1;
     transform: translateX(-50%) translateY(0);
+}
+
+/* 반응형: 태블릿 (600px ~ 1023px) */
+@media (min-width: 600px) {
+    .site-header {
+        max-width: 420px;
+        padding: 0 24px;
+    }
+
+    nav {
+        gap: 16px;
+    }
+
+    .nav-btn a {
+        font-size: 17px;
+        padding: 4px 22px;
+    }
+
+    .main-wrap {
+        padding: 0 24px;
+    }
+
+    .gb-input-area {
+        max-width: 560px;
+        padding: 16px 20px;
+    }
+
+    .gb-input--name {
+        font-size: 14px;
+    }
+
+    .gb-input--message {
+        font-size: 15px;
+    }
+
+    .btn-send {
+        width: 100px;
+        height: 34px;
+        font-size: 16px;
+    }
+
+    .gb-chat {
+        max-width: 680px;
+    }
+
+    .msg-bubble {
+        max-width: 70%;
+        font-size: 15px;
+    }
+
+    .msg-name {
+        font-size: 13px;
+    }
+
+    .modal__box {
+        max-width: 460px;
+        padding: 28px;
+    }
+}
+
+/* 반응형: PC / 데스크톱 (1024px ~) */
+@media (min-width: 1024px) {
+    .site-header {
+        max-width: 520px;
+    }
+
+    nav {
+        gap: 20px;
+    }
+
+    .nav-btn a {
+        font-size: 18px;
+        padding: 5px 26px;
+    }
+
+    .main-wrap {
+        padding: 0 32px;
+    }
+
+    .gb-input-area {
+        max-width: 640px;
+        padding: 18px 24px;
+    }
+
+    .gb-input--message {
+        font-size: 16px;
+    }
+
+    .btn-send {
+        width: 110px;
+        height: 36px;
+        font-size: 17px;
+    }
+
+    .gb-chat {
+        max-width: 760px;
+    }
+
+    .msg-bubble {
+        max-width: 62%;
+        padding: 12px 16px;
+    }
+
+    .modal__box {
+        max-width: 500px;
+    }
+}
+
+/* 반응형: 와이드 데스크톱 (1440px ~) */
+@media (min-width: 1440px) {
+    .gb-chat {
+        max-width: 840px;
+    }
+
+    .msg-bubble {
+        max-width: 58%;
+    }
 }
