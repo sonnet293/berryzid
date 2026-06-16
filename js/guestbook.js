@@ -70,7 +70,7 @@ async function sendMessage() {
   }
 }
 
-const q = query(collection(db, 'guestbook'), orderBy('timestamp', 'asc'));
+const q = query(collection(db, 'guestbook'), orderBy('timestamp', 'desc'));
 
 onSnapshot(q, snapshot => {
   loadingState.style.display = 'none';
@@ -92,8 +92,10 @@ onSnapshot(q, snapshot => {
     const data = change.doc.data();
 
     if (change.type === 'added' && !existingIds.has(docId)) {
-      messageList.appendChild(createMessageEl(docId, data));
-      scrollToBottom();
+      const el = createMessageEl(docId, data);
+      const ref = messageList.children[change.newIndex] || null;
+      messageList.insertBefore(el, ref);
+      scrollToTop();
     }
 
     if (change.type === 'modified') {
@@ -274,9 +276,9 @@ async function deleteReply(docId) {
   }
 }
 
-function scrollToBottom() {
+function scrollToTop() {
   const chatContainer = document.getElementById('chat-container');
-  chatContainer.scrollTo({ top: chatContainer.scrollHeight, behavior: 'smooth' });
+  chatContainer.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function formatTime(ts) {
