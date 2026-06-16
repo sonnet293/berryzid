@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/guestbook.css">
+    <title>GuestBook</title>
+</head>
+<body>
+
+    <header class="site-header">
+        <div id="marquee-board" data-page-id="guestbook">방명록 전광판</div>
+
+        <nav>
+            <div class="nav-btn">
+                <a href="guestbook.html">방명록</a>
+            </div>
+            <div class="nav-btn">
+                <a href="character.html">캐릭터</a>
+            </div>
+            <div class="nav-btn">
+                <a href="backup.html">백업</a>
+            </div>
+        </nav>
+    </header>
+    
+    <main class="main-wrap">
+        <!--메시지 입력-->
+        <div class="gb-input-area">
+            <input type="text" id="name-input" class="gb-input gb-input--name" placeholder="name" maxlength="20" />
+            <input type="text" id="message-input" class="gb-input gb-input--message" placeholder="message" maxlength="300"/>
+
+            <div class="send-button">
+                <button id="send-btn" class="btn btn-send">
+                    <span class="btn__label">SEND</span>
+                </button>
+            </div>
+        </div>
+
+        <!--방명록-->
+        <div class="gb-chat" id="chat-container">
+            <div class="gb-chat__inner" id="messages-list"></div>
+            <div id="empty-state" class="empty-state" style="display: none;">
+                <p>아직 방명록이 없습니다.</p>
+            </div>
+            <div id="loading-state" class="loading-state"></div> <!--로딩 점-->
+        </div>
+    </main>
+
+    <!--답장 모달-->
+    <div id="reply-modal" class="modal" style="display: none;">
+        <div class="modal__box">
+            <div class="modal__header">
+                <span class="modal__title">답장</span>
+                <button id="modal-close" class="modal__close">✕</button>
+            </div>
+            <div id="modal-quote" class="modal__quote"></div>
+            <textarea id="reply-input"
+                      class="modal__textarea"
+                      placeholder="답장하기"
+                      maxlength="300"
+                      rows="3"></textarea>
+            <div class="modal__footer">
+                <button class="btn btn--ghost btn--sm" id="modal-cancel">취소</button>
+                <button class="btn btn--primary btn--sm" id="modal-send">답장</button>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="toast" class="toast"></div>
+
+
+
+    <script type="module" src="js/guestbook.js"></script>
+</body>
+</html>
