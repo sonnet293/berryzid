@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap');
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+@font-face {
+    font-family: 'Yangjin';
+    src: url('https://cdn.jsdelivr.net/gh/supernovice-lab/font@0.9/yangjin.woff') format('woff');
+    font-weight: normal;
+    font-display: swap;
+}
 
 :root {
   --bg:           #121212;
@@ -19,8 +25,8 @@
   --radius:       8px;
   --radius-lg:    14px;
   --radius-xl:    20px;
-  --font-serif:   'DM Serif Display', Georgia, serif;
-  --font-sans:    'DM Sans', 'Pretendard', -apple-system, sans-serif;
+  --font-serif:   'Yangjin', Georgia, serif;
+  --font-sans:    'Yangjin', 'Pretendard', -apple-system, sans-serif;
   --transition:   0.18s ease;
 
   --input-h:      160px;
@@ -38,8 +44,6 @@ html {
     height: 100%;
 }
 
-/* 페이지 전체를 뷰포트 높이에 고정 (문서 스크롤 없음, .gb-chat만 내부 스크롤)
-   → body 높이가 항상 뷰포트와 같아서 background-size: cover 비율이 흔들리지 않음 */
 body {
     height: 100vh;
     height: 100dvh;
