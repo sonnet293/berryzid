@@ -1,0 +1,408 @@
+/* ===== 색상/폰트 토큰 ===== */
+:root {
+  --bg: #faf3ea;
+  --card-bg: #ffffff;
+  --ink: #4a3f35;
+  --muted: #b5a693;
+  --accent: #ff8c7a;
+  --accent-soft: #ffe3dc;
+  --shadow: rgba(74, 63, 53, 0.18);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* hidden 속성은 항상 최우선으로 숨김 처리 (display:flex 같은 규칙에 덮이는 거 방지) */
+[hidden] {
+  display: none !important;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  font-family: "Noto Sans KR", sans-serif;
+  color: var(--ink);
+}
+
+/* ===== 헤더 ===== */
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 36px 20px 0;
+}
+
+.page-title {
+  font-family: "Gaegu", "Noto Sans KR", sans-serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.auth-area {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* 이메일/비밀번호 로그인 패널 */
+.login-panel {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  width: 220px;
+  background: #fff;
+  border-radius: 10px;
+  padding: 16px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+  z-index: 5;
+}
+
+.login-input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--muted);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  margin-bottom: 8px;
+}
+
+.login-input:focus {
+  outline: 2px solid var(--accent);
+  border-color: var(--accent);
+}
+
+.login-error {
+  color: #d23b3b;
+  font-size: 0.78rem;
+  margin: 0 0 8px;
+}
+
+.login-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.owner-badge {
+  font-size: 0.85rem;
+  background: var(--accent-soft);
+  color: var(--accent);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: 700;
+}
+
+.auth-btn {
+  border: 1px solid var(--muted);
+  background: #fff;
+  color: var(--ink);
+  font-size: 0.85rem;
+  padding: 8px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background .2s ease, color .2s ease;
+}
+
+.auth-btn:hover {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+/* ===== 카드 그리드: 데스크탑 기준 4열 x 2행 ===== */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 44px 28px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 50px 20px 80px;
+}
+
+@media (max-width: 900px) {
+  .gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===== 폴라로이드 카드 ===== */
+.card {
+  position: relative;
+  background: var(--card-bg);
+  padding: 14px 14px 30px;
+  border-radius: 3px;
+  box-shadow: 0 6px 14px var(--shadow);
+  transform: rotate(var(--rot, 0deg));
+  transition: transform .25s ease, box-shadow .25s ease;
+  will-change: transform;
+}
+
+/* 카드마다 살짝 다른 각도 (테이블 위에 흩어진 느낌) */
+.gallery .card:nth-child(8n+1) { --rot: -2.5deg; }
+.gallery .card:nth-child(8n+2) { --rot: 1.5deg; }
+.gallery .card:nth-child(8n+3) { --rot: -1deg; }
+.gallery .card:nth-child(8n+4) { --rot: 2.5deg; }
+.gallery .card:nth-child(8n+5) { --rot: 2deg; }
+.gallery .card:nth-child(8n+6) { --rot: -2deg; }
+.gallery .card:nth-child(8n+7) { --rot: 1deg; }
+.gallery .card:nth-child(8n+8) { --rot: -1.5deg; }
+
+/* 마우스 올리면 살짝 커지면서 똑바로 펴짐 (테이블에서 집어드는 느낌) */
+.card:hover {
+  transform: rotate(0deg) scale(1.08);
+  box-shadow: 0 16px 28px var(--shadow);
+  z-index: 2;
+}
+
+/* washi tape 장식 */
+.card .tape {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  width: 70px;
+  height: 22px;
+  margin-left: -35px;
+  background: repeating-linear-gradient(
+    45deg,
+    var(--accent-soft),
+    var(--accent-soft) 6px,
+    #fff4f1 6px,
+    #fff4f1 12px
+  );
+  opacity: 0.85;
+  transform: rotate(-3deg);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  pointer-events: none;
+}
+
+.photo-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: #f1ebe2;
+  overflow: hidden;
+}
+
+.photo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.photo-frame.is-empty .photo-img {
+  display: none;
+}
+
+.photo-placeholder {
+  position: absolute;
+  inset: 0;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: var(--muted);
+}
+
+.photo-frame.is-empty .photo-placeholder {
+  display: flex;
+}
+
+.photo-placeholder .plus {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.placeholder-text {
+  font-size: 0.8rem;
+}
+
+/* 주인일 때만 보이는 연필 편집 버튼 */
+.edit-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  font-size: 0.95rem;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+body.is-owner .edit-btn {
+  display: flex;
+}
+
+body.is-owner .photo-frame {
+  cursor: pointer;
+}
+
+.card-name {
+  margin: 14px 0 0;
+  text-align: center;
+  font-family: "Gaegu", "Noto Sans KR", sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.card-name.is-empty {
+  color: var(--muted);
+  font-weight: 400;
+}
+
+/* ===== 편집 모달 ===== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(74, 63, 53, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  padding: 20px;
+}
+
+.modal-box {
+  background: #fff;
+  width: 100%;
+  max-width: 360px;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+}
+
+.modal-title {
+  margin: 0 0 16px;
+  font-family: "Gaegu", "Noto Sans KR", sans-serif;
+  font-size: 1.4rem;
+}
+
+.modal-preview {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: #f1ebe2;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 14px;
+}
+
+.modal-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.preview-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: var(--muted);
+}
+
+.file-label {
+  display: inline-block;
+  margin-bottom: 12px;
+  padding: 8px 16px;
+  border: 1px solid var(--muted);
+  border-radius: 20px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.file-label:hover {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+}
+
+.name-input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--muted);
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: inherit;
+  margin-bottom: 8px;
+}
+
+.name-input:focus {
+  outline: 2px solid var(--accent);
+  border-color: var(--accent);
+}
+
+.modal-error {
+  color: #d23b3b;
+  font-size: 0.8rem;
+  margin: 4px 0 0;
+}
+
+.modal-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 18px;
+}
+
+.modal-actions-right {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-text {
+  border: none;
+  background: none;
+  color: var(--muted);
+  font-size: 0.85rem;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.btn-cancel,
+.btn-save {
+  border: none;
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.btn-cancel {
+  background: #eee;
+  color: var(--ink);
+}
+
+.btn-save {
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+}
+
+.btn-save:disabled,
+.btn-cancel:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

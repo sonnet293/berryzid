@@ -9,7 +9,9 @@ export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 export const BUCKET_NAME = "post-images";
 
 export async function uploadImage(blob, fileName) {
-  const filePath = `posts/${Date.now()}_${fileName}`;
+  const ext = (fileName.split(".").pop() || "png").toLowerCase().replace(/[^a-z0-9]/g, "");
+  const safeName = `${Date.now()}_${Math.random().toString(36).slice(2, 8)}.${ext || "png"}`;
+  const filePath = `posts/${safeName}`;
 
   const { data, error } = await supabase.storage
     .from(BUCKET_NAME)

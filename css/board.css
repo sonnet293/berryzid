@@ -1,0 +1,143 @@
+    /* ─── 전광판 래퍼 ─── */
+    .marquee-wrap {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      background: #111;
+      padding: 10px 0;
+      /* 원하는 스타일로 자유롭게 수정하세요 */
+    }
+ 
+    /* ─── 흐르는 트랙 ─── */
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marquee-scroll 20s linear infinite;
+    }
+ 
+    /* 마우스 올리면 일시정지 */
+    .marquee-wrap:hover .marquee-track {
+      animation-play-state: paused;
+    }
+ 
+    .marquee-text {
+      white-space: nowrap;
+      font-size: 1.1rem;
+      color: #f0f0f0;
+      padding-right: 80px; /* 두 복사본 사이 간격 */
+      font-family: sans-serif;
+    }
+ 
+    @keyframes marquee-scroll {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+ 
+    /* ─── 편집 버튼 (주인에게만 보임) ─── */
+    .marquee-edit-btn {
+      position: absolute;
+      top: 50%;
+      right: 12px;
+      transform: translateY(-50%);
+      background: rgba(255 255 255 / 0.15);
+      border: 1px solid rgba(255 255 255 / 0.3);
+      border-radius: 6px;
+      color: #fff;
+      font-size: 0.85rem;
+      padding: 3px 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: background 0.2s;
+    }
+    .marquee-edit-btn:hover {
+      background: rgba(255 255 255 / 0.28);
+    }
+ 
+    /* ─── 모달 오버레이 ─── */
+    .marquee-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0 0 0 / 0.55);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+ 
+    /* ─── 모달 박스 ─── */
+    .marquee-modal {
+      background: #fff;
+      border-radius: 12px;
+      padding: 28px 24px 20px;
+      width: min(480px, 90vw);
+      box-shadow: 0 8px 32px rgba(0 0 0 / 0.25);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+ 
+    .marquee-modal-title {
+      margin: 0;
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+ 
+    .marquee-modal-page {
+      margin: 0;
+      font-size: 0.85rem;
+      color: #666;
+    }
+ 
+    .marquee-modal-textarea {
+      width: 100%;
+      box-sizing: border-box;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 0.95rem;
+      resize: vertical;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .marquee-modal-textarea:focus {
+      border-color: #555;
+    }
+ 
+    .marquee-modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+ 
+    .marquee-btn-cancel,
+    .marquee-btn-save {
+      padding: 7px 18px;
+      border-radius: 7px;
+      border: none;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .marquee-btn-cancel {
+      background: #eee;
+      color: #333;
+    }
+    .marquee-btn-save {
+      background: #222;
+      color: #fff;
+    }
+    .marquee-btn-save:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    .marquee-btn-cancel:hover { opacity: 0.8; }
+    .marquee-btn-save:hover:not(:disabled) { opacity: 0.85; }
+ 
+    .marquee-modal-msg {
+      margin: 0;
+      font-size: 0.82rem;
+      color: #555;
+      min-height: 1.2em;
+    }

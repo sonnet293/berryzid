@@ -124,7 +124,7 @@ function createMessageEl(docId, data) {
   if (isOwnerMsg) {
     const badge = document.createElement('span');
     badge.className = 'msg-badge';
-    badge.textContent = 'OWNER 이름 설정';
+    badge.textContent = 'OWNER';
     meta.appendChild(badge);
   }
   const nameEl = document.createElement('span');
@@ -180,10 +180,10 @@ function createMessageEl(docId, data) {
     replyMeta.className = 'msg-meta';
     const replyBadge = document.createElement('span');
     replyBadge.className = 'msg-badge';
-    replyBadge.textContent = 'OWNER 이름 설정';
+    replyBadge.textContent = 'OWNER';
     const replyName = document.createElement('span');
     replyName.className = 'msg-name';
-    replyName.textContent = data.reply.name || 'OWNER 이름 설정';
+    replyName.textContent = data.reply.name || '린';
     replyMeta.appendChild(replyBadge);
     replyMeta.appendChild(replyName);
 
@@ -246,7 +246,7 @@ modalSend.addEventListener('click', async () => {
     await updateDoc(doc(db, 'guestbook', replyTarget.docId), {
       reply: {
         message: text,
-        name: 'OWNER 이름 설정',
+        name: '린',
         timestamp: new Date().toISOString()
       }
     });
