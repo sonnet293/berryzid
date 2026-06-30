@@ -287,10 +287,14 @@ function formatTime(ts) {
   if (ts?.toDate) date = ts.toDate();
   else if (typeof ts === 'string') date = new Date(ts);
   else return '';
-  return date.toLocaleString('ko-KR', {
-    year: '2-digit', month: '2-digit', day: '2-digit',
-    hour: '2-digit', minute: '2-digit'
-  });
+
+  const yyyy = date.getFullYear();
+  const mm = date.getMonth() + 1;
+  const dd = date.getDate();
+  const hh = String(date.getHours()).padStart(2, '0');
+  const min = String(date.getMinutes()).padStart(2, '0');
+
+  return `${yyyy}.${mm}.${dd} ${hh}:${min}`;
 }
 
 // 토스트
